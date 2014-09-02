@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5FA8175819B0183F00CFC3F4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FA8175719B0183F00CFC3F4 /* main.cpp */; };
-		5FA8175A19B0183F00CFC3F4 /* draw_triangle.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5FA8175919B0183F00CFC3F4 /* draw_triangle.1 */; };
 		5FA8176119B0185A00CFC3F4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA8176019B0185A00CFC3F4 /* CoreVideo.framework */; };
 		5FA8176319B0185F00CFC3F4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA8176219B0185F00CFC3F4 /* OpenGL.framework */; };
 		5FA8176519B0186900CFC3F4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA8176419B0186900CFC3F4 /* Cocoa.framework */; };
@@ -24,7 +23,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				5FA8175A19B0183F00CFC3F4 /* draw_triangle.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -33,7 +31,6 @@
 /* Begin PBXFileReference section */
 		5FA8175419B0183F00CFC3F4 /* draw-triangle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "draw-triangle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FA8175719B0183F00CFC3F4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		5FA8175919B0183F00CFC3F4 /* draw_triangle.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = draw_triangle.1; sourceTree = "<group>"; };
 		5FA8176019B0185A00CFC3F4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		5FA8176219B0185F00CFC3F4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5FA8176419B0186900CFC3F4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -85,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				5FA8175719B0183F00CFC3F4 /* main.cpp */,
-				5FA8175919B0183F00CFC3F4 /* draw_triangle.1 */,
 				5FB6C61719B408B400FC95A1 /* ShaderLoader.cpp */,
 				5FB6C61819B408B400FC95A1 /* ShaderLoader.h */,
 				5FB6C61A19B408FE00FC95A1 /* SimpleShader.h */,

@@ -7,13 +7,15 @@
 #include "ShaderLoader.h"
 #include "SimpleShader.h"
 
+GLuint vao;
+GLuint vbo[2];
 
-ShaderLoader myShader;
+#define ATTRIB_POSITION_LOCATION 0
+#define ATTRIB_COLOR_LOCATION 1
 
 //设置三角形
 void initTriangle(void)
 {
-
     GLfloat vertex_data[] = {
         -1.0f,-1.0f,0.0f,
         1.0f,-1.0f,0.0f,
@@ -26,37 +28,39 @@ void initTriangle(void)
         0.0, 0.0, 1.0
     };
     
-    GLuint vao;
-    glGenVertexArrays(1,&vao);
-    glBindVertexArray(vao);
-    
-    GLuint vbo[2];
+    //VBO
     glGenBuffers(2, vbo);
-    
     glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,0);
-
+    
     glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(color_data), color_data, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,0,0);
+    
+    //VAO
+    glGenVertexArrays(1,&vao);
+    glBindVertexArray(vao);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+    glVertexAttribPointer(ATTRIB_POSITION_LOCATION,3,GL_FLOAT,GL_FALSE,0,0);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+    glVertexAttribPointer(ATTRIB_COLOR_LOCATION,3,GL_FLOAT,GL_FALSE,0,0);
+
+    glEnableVertexAttribArray(ATTRIB_POSITION_LOCATION);
+    glEnableVertexAttribArray(ATTRIB_COLOR_LOCATION);
 }
 
-//初始化着色器
+//设置并使用着色器
 void initShader(void)
 {
-    myShader.initFromString(vert_shader, frag_shader);
-    myShader.addAttribute("position", 0);
-    myShader.addAttribute("color", 1);
-    myShader.bind();
+    ShaderLoader shaderLoader;
+    shaderLoader.initFromString(vert_shader, frag_shader);
+    shaderLoader.bind();
 }
 
-//绘制三角形
+//画三角形
 void drawTriangle(void)
 {
-    //画三角形
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
@@ -68,13 +72,14 @@ int main(void)
     if (!glfwInit())
         return -1;
     
+    //使用OpenGL 3.2
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(320, 240, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -84,8 +89,8 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
     
-    initShader();
     initTriangle();
+    initShader();
     
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -96,7 +101,6 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         drawTriangle();
-        
         
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

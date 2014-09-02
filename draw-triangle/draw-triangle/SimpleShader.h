@@ -8,10 +8,10 @@
 
 const char* vert_shader =
 "\
-#version 150\n\
+#version 330\n\
 \n\
-in vec3 position;\n\
-in vec3 color;\n\
+layout (location = 0) in vec3 position;\n\
+layout (location = 1) in vec3 color;\n\
 out vec3 ver_color;\n\
 \n\
 void main(void) { \n\
@@ -22,7 +22,7 @@ gl_Position = vec4(position, 1.0);\n\
 
 const char* frag_shader =
 "\
-#version 150\n\
+#version 330\n\
 \n\
 in vec3 ver_color;\n\
 out vec4 frag_color;\n\
