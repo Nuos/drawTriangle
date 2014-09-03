@@ -55,6 +55,7 @@ void initShader(void)
 {
     ShaderLoader shaderLoader;
     shaderLoader.initFromString(vert_shader, frag_shader);
+//    ShaderLoader.addAttribute("position",ATTRIB_POSITION_LOCATION);
     shaderLoader.bind();
 }
 
