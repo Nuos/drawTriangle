@@ -10,10 +10,9 @@
 GLuint vao;
 GLuint vbo[2];
 
-#define ATTRIB_POSITION_LOCATION 0
-#define ATTRIB_COLOR_LOCATION 1
+#define ATTRIB_LOCATION_POSITION 0
+#define ATTRIB_LOCATION_COLOR 1
 
-//设置三角形
 void initTriangle(void)
 {
     GLfloat vertex_data[] = {
@@ -28,7 +27,7 @@ void initTriangle(void)
         0.0, 0.0, 1.0
     };
     
-    //VBO
+    //vbo
     glGenBuffers(2, vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
@@ -36,18 +35,20 @@ void initTriangle(void)
     glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(color_data), color_data, GL_STATIC_DRAW);
     
-    //VAO
+    //vao
     glGenVertexArrays(1,&vao);
     glBindVertexArray(vao);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
-    glVertexAttribPointer(ATTRIB_POSITION_LOCATION,3,GL_FLOAT,GL_FALSE,0,0);
     
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
-    glVertexAttribPointer(ATTRIB_COLOR_LOCATION,3,GL_FLOAT,GL_FALSE,0,0);
-
-    glEnableVertexAttribArray(ATTRIB_POSITION_LOCATION);
-    glEnableVertexAttribArray(ATTRIB_COLOR_LOCATION);
+        glEnableVertexAttribArray(ATTRIB_LOCATION_POSITION);
+        glEnableVertexAttribArray(ATTRIB_LOCATION_COLOR);
+    
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+        glVertexAttribPointer(ATTRIB_LOCATION_POSITION,3,GL_FLOAT,GL_FALSE,0,0);
+    
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+        glVertexAttribPointer(ATTRIB_LOCATION_COLOR,3,GL_FLOAT,GL_FALSE,0,0);
+    
+    glBindVertexArray(0);
 }
 
 //设置并使用着色器
@@ -55,14 +56,15 @@ void initShader(void)
 {
     ShaderLoader shaderLoader;
     shaderLoader.initFromString(vert_shader, frag_shader);
-//    ShaderLoader.addAttribute("position",ATTRIB_POSITION_LOCATION);
     shaderLoader.bind();
 }
 
 //画三角形
 void drawTriangle(void)
 {
+    glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
+    glBindVertexArray(0);
 }
 
 int main(void)
