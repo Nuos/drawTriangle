@@ -14,11 +14,11 @@
 		<string>https://github.com/opengl-records/draw-triangle.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>draw-triangle/draw-triangle.xcodeproj/project.xcworkspace</string>
+	<string>draw-triangle.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A527C22B943D800473020D47A8724FA5E92004FB</key>
-		<string>../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/opengl-records/draw-triangle.git</string>

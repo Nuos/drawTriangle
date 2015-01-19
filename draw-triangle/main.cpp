@@ -13,19 +13,25 @@ GLuint vbo[2];
 #define ATTRIB_LOCATION_POSITION 0
 #define ATTRIB_LOCATION_COLOR 1
 
-void initTriangle(void)
+
+void init(void)
 {
     GLfloat vertex_data[] = {
-        -1.0f,-1.0f,0.0f,
-        1.0f,-1.0f,0.0f,
-        0.0f,1.0f,0.0f,
+        -0.8f,-0.8f,0.0f,
+        0.8f,-0.8f,0.0f,
+        0.0f,0.8f,0.0f,
+        1.0f,0.5f,0.0f,
+        1.0f,1.0f,0.0f,
     };
     
     GLfloat color_data[] = {
         1.0, 0.0, 0.0,
         0.0, 1.0, 0.0,
-        0.0, 0.0, 1.0
+        0.0, 0.0, 1.0,
+        0.0, 0.0, 1.0,
+        0.0, 1.0, 0.0,
     };
+    
     
     //vbo
     glGenBuffers(2, vbo);
@@ -44,26 +50,23 @@ void initTriangle(void)
     
         glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
         glVertexAttribPointer(ATTRIB_LOCATION_POSITION,3,GL_FLOAT,GL_FALSE,0,0);
-    
         glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
         glVertexAttribPointer(ATTRIB_LOCATION_COLOR,3,GL_FLOAT,GL_FALSE,0,0);
     
     glBindVertexArray(0);
+    
+    ShaderLoader shader;
+    shader.initFromString(vert_shader, frag_shader);
+    shader.bind();
 }
 
-//设置并使用着色器
-void initShader(void)
-{
-    ShaderLoader shaderLoader;
-    shaderLoader.initFromString(vert_shader, frag_shader);
-    shaderLoader.bind();
-}
-
-//画三角形
-void drawTriangle(void)
+/**
+ * 绘制三角形
+*/
+void draw(void)
 {
     glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 5);
     glBindVertexArray(0);
 }
 
@@ -92,8 +95,7 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
     
-    initTriangle();
-    initShader();
+    init();
     
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -103,7 +105,7 @@ int main(void)
         glClearColor(0.0f,0.0f,0.0f,0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        drawTriangle();
+        draw();
         
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
